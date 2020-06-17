@@ -8263,11 +8263,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bestb\\source\\repos\\Sprint-App\\Sprint-App\\Sprint.csproj",
+      "projectUniqueName": "C:\\Users\\bestb\\source\\repos\\sprint-asp-net\\Sprint-App\\Sprint.csproj",
       "projectName": "Sprint",
-      "projectPath": "C:\\Users\\bestb\\source\\repos\\Sprint-App\\Sprint-App\\Sprint.csproj",
+      "projectPath": "C:\\Users\\bestb\\source\\repos\\sprint-asp-net\\Sprint-App\\Sprint.csproj",
       "packagesPath": "C:\\Users\\bestb\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bestb\\source\\repos\\Sprint-App\\Sprint-App\\obj\\",
+      "outputPath": "C:\\Users\\bestb\\source\\repos\\sprint-asp-net\\Sprint-App\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bestb\\AppData\\Roaming\\NuGet\\NuGet.Config",

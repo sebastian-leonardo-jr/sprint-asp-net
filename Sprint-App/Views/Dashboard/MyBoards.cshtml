@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Sprint.Models.Board>
+@{
+    ViewData["Title"] = "MyBoards";
+}
+
+<!-- MyBoards -->
+<div id="my-boards-row" class="row">
+    <div style="height: 900px" class="col-lg-12">
+        <i style="color: #818896; padding: 1rem" class="material-icons" onmouseover="this.style.cursor='pointer';" onclick="displayDashboard()">arrow_back</i>
+
+        <div id="my-boards-grid" class="grid">
+            @foreach (var Board in Model)
+            {
+                <div class="module">
+                    <div style="width: 100%; height: 100%" class="card list-card boards-card">
+                        <a style="text-decoration: none; color: #0f0f0f; display: block; height: 100%" onclick="updateRecent('@Board.ID')">
+                            <div style="height: 75%; text-align: center; padding-top: 30%" class="card-body">
+                                <p class="card-text">@Board.Name</p>
+                            </div>
+                        </a>
+                        <div class="card-footer">
+                            <a class="material-icons" style="text-decoration: none; color: black" href="#edit-my-board-modal" rel="modal:open" onclick="getMyBoard('@Board.ID')" data-toggle="tooltip" data-placement="bottom" title="Edit Details"><i class="material-icons">create</i></a>
+                            <i class="material-icons" onclick="deleteMyBoard('@Board.ID')" data-toggle="tooltip" data-placement="bottom" title="Delete">delete</i>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- Create Board -->
+            <div class="module">
+                <div style="width: 100%; height: 100%" class="card list-card boards-card">
+                    <a style="text-decoration: none; color: #0f0f0f; display: block; height: 100%" href="#my-board-modal" rel="modal:open">
+                        <div style="height: 100%; text-align: center; padding-top: 30%" class="card-body">
+                            <p class="card-text"><i class="material-icons">add</i></p>
+                            <p class="card-text">Create Board</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- !Create Board -->
+        </div>
+    </div>
+</div>
+<!-- !MyBoards -->
+
+<!-- Modals -->
+<!-- Edit Board Modal -->
+<div style="width: 70%; height: 60%" id="edit-my-board-modal" class="modal">
+    <form style="padding-top: 1rem !important;" id="edit-board-form" class="text-center p-5">
+        <label for="edit-my-board-name">Name</label>
+        <input style=" margin-bottom: 10px !important; margin-top: 8px; width: 350px;" type="text" id="edit-my-board-name" class="form-control mb-4" placeholder="Enter a name..." onfocusout="updateMyBoard()">
+        <div style="margin-top: 8px;" class="form-group">
+            <label for="edit-my-board-description">Description</label>
+            <textarea class="form-control rounded-0" id="edit-my-board-description" rows="3" name="description" placeholder="Enter a description..." onfocusout="updateMyBoard()"></textarea>
+        </div>
+        <div style="margin-top: 8px;" class="form-group">
+            <label for="edit-my-board-dod">Definition of Done</label>
+            <textarea class="form-control rounded-0" id="edit-my-board-dod" rows="3" name="dod" placeholder="Enter a definition of done..." onfocusout="updateMyBoard()"></textarea>
+        </div>
+    </form>
+</div>
+<!-- !Edit Board Modal -->
+<!-- My Board Modal -->
+<div style="width: 70%; height: 60%" id="my-board-modal" class="modal">
+    <input id="my-board-id" style="display: none">
+    <form style="padding-top: 1rem !important;" id="create-board-form" class="text-center p-5">
+        <label for="my-board-name">Name</label>
+        <input style=" margin-bottom: 10px !important; margin-top: 8px; width: 350px;" type="text" id="my-board-name" class="form-control mb-4" placeholder="Enter a name...">
+        <div style="margin-top: 8px;" class="form-group">
+            <label for="my-board-description">Description</label>
+            <textarea class="form-control rounded-0" id="my-board-description" rows="3" name="description" placeholder="Enter a description..."></textarea>
+        </div>
+        <div style="margin-top: 8px;" class="form-group">
+            <label for="my-board-dod">Definition of Done</label>
+            <textarea class="form-control rounded-0" id="my-board-dod" rows="3" name="dod" placeholder="Enter a definition of done..."></textarea>
+        </div>
+        <button id="create-my-board" style="background: #31353D; border-color: #31353D;" class="btn btn-info btn-block" type="button" onclick="addMyBoard()">Create</button>
+    </form>
+</div>
+<!-- !My Board Modal -->
+<!-- !Modals -->

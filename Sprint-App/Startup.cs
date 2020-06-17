@@ -39,7 +39,7 @@ namespace Sprint
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Main}/{action=Dashboard}/{id?}");
+                    pattern: "{controller=Dashboard}/{action=Dashboard}/{id?}");
             });
         }
     }
