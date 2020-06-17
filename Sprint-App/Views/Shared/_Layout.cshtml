@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Sprint</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/theme.css" />
+    <link rel="stylesheet" href="~/css/all.css" />
+    <link rel="stylesheet" href="~/css/account.css" />
+</head>
+<body>
+    <div class="page-wrapper chiller-theme">
+
+        <!--Sidebar-->
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <a>Sprint</a>
+                </div>
+                <!-- Dashboard Navigation -->
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="header-menu">
+                            <span>NAVIGATION</span>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa fa-home"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa fa-th-list"></i>
+                                <span>My Boards</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa fa-users"></i>
+                                <span>Teams</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa fa-calendar"></i>
+                                <span>Calendar</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- !Dashboard Navigation -->
+                <!-- Recent Boards -->
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="header-menu">
+                            <span>RECENT BOARDS</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- !Recent Boards -->
+            </div>
+        </nav>
+        <!--!Sidebar-->
+        <!--Main Wrapper-->
+        <main role="main" class="page-content">
+            <!--Navbar-->
+            <nav id="navbar" class="navbar navbar-expand-sm bg-dark navbar-dark">
+                <!-- Logo -->
+                <a style="padding-top: 25px;" id="logo" class="navbar-brand"><img src="~/images/logo.svg" style="width: 120px; height: 60px;" alt="logo" /></a>
+                <!-- !Logo -->
+                <!-- Left Side -->
+                <ul class="navbar-nav">
+                    <!-- Menu -->
+                    <li class="nav-item">
+                        <a id="show-sidebar" class="nav-link" onclick="toggleSidebar()"><i class="material-icons">menu</i></a>
+                    </li>
+                    <!-- !Menu -->
+                    <!-- Home -->
+                    <li class="nav-item">
+                        <a class="nav-link"><i class="material-icons">home</i></a>
+                    </li>
+                    <!-- !Home -->
+                </ul>
+                <!-- !Left Side -->
+                <!-- Right Side -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Notifications -->
+                    <li id="notifications-dropdown" class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="notifications" data-toggle="dropdown">
+                            <i class="material-icons">notifications</i>
+                            <span class="badge badge-pill badge-danger notification">
+                            </span>
+                        </a>
+                        <div style="width: 500px !important;" class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-header">Notifications</a>
+                            <div class="dropdown-divider"></div>
+                            <a data-toggle="modal" data-target="#notification-modal" onmouseover="refreshNotification(${notification.id})" class="dropdown-item"></a>
+                            <div class="dropdown-divider"></div>
+                            <a data-toggle="modal" data-target="#notification-modal" class="dropdown-item">View all notifications</a>
+                        </div>
+                    </li>
+                    <!-- !Notifications -->
+                    <!-- User -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" id="navbardrop" data-toggle="dropdown">
+                            <i class="material-icons">account_circle</i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-header">Account</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">Edit Details</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">Logout</a>
+                        </div>
+                    </li>
+                    <!-- !User -->
+                </ul>
+                <!-- !Right Side -->
+            </nav>
+            <!--!Navbar-->
+            <!--Main Content-->
+            @RenderBody()
+            <!--!Main Content-->
+        </main>
+        <!--Main Wrapper-->
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        // Sidebar Functionality
+        function toggleSidebar() {
+            if($(".page-wrapper").hasClass("toggled") === false) {
+                $("#show-sidebar").click(function() {
+                    $(".page-wrapper").addClass("toggled");
+                });
+            }
+            else if ($(".page-wrapper").hasClass("toggled") === true) {
+                $("#show-sidebar").click(function() {
+                    $(".page-wrapper").removeClass("toggled");
+                });
+            }
+        }
+
+        jQuery(function ($) {
+
+            $(".sidebar-dropdown > a").click(function() {
+                $(".sidebar-submenu").slideUp(200);
+                if (
+                    $(this)
+                        .parent()
+                        .hasClass("active")
+                ) {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this)
+                        .parent()
+                        .removeClass("active");
+                } else {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this)
+                        .next(".sidebar-submenu")
+                        .slideDown(200);
+                    $(this)
+                        .parent()
+                        .addClass("active");
+                }
+            });
+
+            $("#close-sidebar").click(function() {
+                $(".page-wrapper").removeClass("toggled");
+            });
+            $("#show-sidebar").click(function() {
+                $(".page-wrapper").addClass("toggled");
+            });
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
